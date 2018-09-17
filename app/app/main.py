@@ -10,6 +10,10 @@ def hello():
 def menu():
     return render_template('menu.html')
 
+@app.route("/max/")
+def max():
+    return "Hello world from Max"
+
 
 if __name__ == "__main__":
     # Only for debugging while developing
