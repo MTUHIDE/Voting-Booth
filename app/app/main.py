@@ -12,7 +12,7 @@ def menu():
 
 @app.route("/max/")
 def max():
-    return "Hello world from Max"
+    return render_template('max.html')
 
 
 if __name__ == "__main__":
