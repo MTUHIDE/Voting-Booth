@@ -135,6 +135,7 @@ def manage_question(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
     survey_name = survey.title
     info = Question.objects.all()
+    print(survey_id)
 
     context = {'detail': info,
                'survey_id': survey_id,
@@ -264,8 +265,23 @@ def results(request):
 @login_required
 def results(request):
     info = Question.objects.all()
-    print(info)
-    resultdata = {'detail': info}
-    print(resultdata)
-    print(request)
+    survey = Survey.objects.all()
+
+    if request.method == 'POST':
+        if 'send' in request.POST:
+            data = request.POST
+            display = data.get("surveys")
+    elif request.method == 'GET':
+        display = survey[0]
+        print(display)
+        print(survey[0])
+    else:
+        if not survey:
+            display = ''
+
+    resultdata = {'survey': survey,
+                  'detail': info,
+                  'display': display}
+    #print(resultdata)
+    #print(request)
     return render(request, 'admin_back/results.html', resultdata)

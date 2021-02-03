@@ -19,8 +19,22 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-
 <h2>Survey Table</h2>
+    <label for="surveys">Choose a survey to see the results:</label>
+    <select name="surveys" id="surveys" form="swap">
+        {% for x in survey %}
+            <form method= "post">
+{#            {% csrf_token %}#}
+                <option value="{{ x }}">{{ x }}</option>
+
+            </form>
+        {% endfor %}
+    </select>
+    <form method = "post" id="swap">
+        {% csrf_token %}
+        <input type="submit" value="send" name="send"/>
+
+    </form>
  <table>
      <tr>
          <th>Survey Name</th>
@@ -30,11 +44,13 @@ tr:nth-child(even) {
      </tr>
      <tr>
          {% for s in detail %}
-             <td>{{ s.survey }}</td>
-             <td>{%if s.text != '' and s.state != null %}{{ s.text}}{% else %}Question does not exist{% endif %}</td>
-             <td>{{ s.confirms }}</td>
-             <td>{{ s.votes }}</td>
-             </tr>
+             {%if s.survey == display or  s.survey.title == display%}
+                <td>{{ s.survey }}</td>
+                <td>{%if s.text != '' and s.state != null %}{{ s.text}}{% else %}Question does not exist{% endif %}</td>
+                <td>{{ s.confirms }}</td>
+                <td>{{ s.votes }}</td>
+                </tr>
+             {% endif %}
        {% endfor %}
  </table>
 

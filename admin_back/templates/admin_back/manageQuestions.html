@@ -21,6 +21,7 @@
 
 
          {% for s in detail %}
+             {%if s.survey_id == survey_id %}
                 <form method= "post">
                 {% csrf_token %}
 
@@ -33,6 +34,7 @@
                     <td><input type="submit" value= "delete" name="delete"/></td>
 
                 </form>
+             {% endif %}
              </tr>
        {% endfor %}
  </table>
