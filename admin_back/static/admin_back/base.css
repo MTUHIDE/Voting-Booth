@@ -13,23 +13,28 @@
 
 }
 
+.top-banner:hover{
+    color: rgb(224 168 0);
+}
+
 .logo{
     width: 60px;
 }
 input{
     font-size: 20px;
 }
-button{
+.button{
     font-size: 20px;
-    color: black;
-    background-color: rgb(252,206,1);
-    border: solid black 2px;
+    color: white;
+    background-color: rgb(0,123,255);
+    border: rgb(0,123,255) 2px;
     transition: 0.3s;
     width: 245px;
     }
 .button:hover {
     color: white;
-    background-color: black;
+    background-color: rgb(0,105,217);
+    border: rgb(0,98,204) 2px;
     text-decoration: underline;
 }
 input{

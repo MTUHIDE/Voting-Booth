@@ -13,8 +13,8 @@
      <tr>
          <th>Question</th>
          <th>New Question</th>
-         <th>edit</th>
-         <th>delete</th>
+         <th>Edit</th>
+         <th>Delete</th>
 
      </tr>
      <tr>
@@ -29,8 +29,8 @@
 {#                    <td>{%if s.state == 1 %} Active {% else %}Inactive{% endif %}</td>#}
                     <input type="hidden" value="{{ s.id }}" name="qid"/>
                     <input type="hidden" value="{{ s.text }}" name="qtext"/>
-                    <td><input type="submit" value= "Submit Changes" name="edit"/></td>
-                    <td><input type="submit" value= "delete" name="delete"/></td>
+                    <td><input type="submit" class="btn btn-warning" value= "Submit Changes" name="edit"/></td>
+                    <td><input type="submit" class="btn btn-warning" value= "Delete" name="delete"/></td>
 
                 </form>
              </tr>
@@ -42,7 +42,7 @@
 
 <form method = "post">
     {% csrf_token %}
-    <input type="submit" value="add question" name="add question"/>
+    <input type="submit" class="btn btn-warning" value="Add Question" name="add question"/>
 
 </form>
 
