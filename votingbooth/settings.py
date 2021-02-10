@@ -18,9 +18,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '0ueky(5%*#i0q6x@#ssawgda+bf3u#32d8t06qpyb3cjtsndy6'
-RECAPTCHA_SECRET_KEY = '6LdlyvIZAAAAAKdUT5BnGPDdOOO-ge0372znZao1'
+OLD_RECAPTCHA_SECRET_KEY = '6LdlyvIZAAAAAKdUT5BnGPDdOOO-ge0372znZao1'
+RECAPTCHA_SECRET_KEY = '6LeGC1EaAAAAAI4zqb2O69WyGpw3iPeoFPuL7jCP'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -150,7 +152,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'hide.test.voting.booth@gmail.com'
+EMAIL_HOST_PASSWORD = 'Voting!booth1'
 
 # go to https://myaccount.google.com/lesssecureapps, log in to your account and make 'Allow less secure apps: ON'
