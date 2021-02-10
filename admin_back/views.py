@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.contrib import messages, auth
@@ -126,11 +126,6 @@ def create_survey(request):
     return render(request, 'admin_back/create_survey.html', context)
 
 @login_required
-def manage_survey(request):
-    context = {}
-    return render(request, 'admin_back/manage_survey.html', context)
-
-@login_required
 def manage_question(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
     survey_name = survey.title
@@ -169,6 +164,22 @@ def manage_question(request, survey_id):
             return render(request, 'admin_back/manageQuestions.html', context)
 
     return render(request, 'admin_back/manageQuestions.html', context)
+
+@login_required
+def manage_survey(request):
+    info = Survey.objects.all()
+    context = {"surveys": info}
+
+    if request.method == "POST":
+        id = request.POST.get("sid", "0")
+        survey = Survey.objects.get(id=id)
+        if "edit" in request.POST:
+            request.method = None
+            return manage_question(request, id)
+        elif "delete" in request.POST:
+            survey.delete()
+
+    return render(request, 'admin_back/manage_survey.html', context)
 
 @login_required
 def create_question(request, survey_id):

@@ -6,34 +6,55 @@
 
 <div class="container" align="center">
     <div class="row justify-content-center">
-        <div class="col-sm-auto" style="width: 60px">
+        <div class="col-sm-3">
             <h5>Active</h5>
         </div>
-        <div class="col-sm-auto" style="width: 205px">
+        <div class="col-sm-3">
             <h5>Survey Name</h5>
         </div>
-        <div class="col-sm-auto">
+        <div class="col-sm-3">
             <h5>Edit Survey</h5>
         </div>
-        <div class="col-sm-auto">
+        <div class="col-sm-3">
             <h5>Delete Survey</h5>
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-sm-auto" style="margin-left: -15px">
-            <input type="radio" value="active" id="active1" name="active">
-        </div>
-        <div class="col-sm-auto">
-            <input type="text" value="Survey 1" />
-        </div>
-        <div class="col-sm-auto" >
-            <button type="button" class="btn btn-warning" style="width:100px;" onclick="window.location.href = 'http://127.0.0.1:8000/admin/manage_question/1/'">Edit</button>
-        </div>
-        <div class="col-sm-auto">
-            <input type="button" class="btn btn-warning" style="width:100px;" value="Delete" onclick=""/><br/>
-        </div>
-    </div>
+    {% for s in surveys %}
+        <form method= "POST" name="{{ s.title }}" id="{{ s.title }}">
+            {% csrf_token %}
+             <div class="row justify-content-center">
+                <div class="col-sm-3">
+                    <label for="{{ s.title }}-active">Currently not working</label>
+                    <input type="checkbox" id="{{ s.title }}-active" name="{{ s.title }}-active"/>
+                </div>
+                <div class="col-sm-3">
+                   {{ s.title }}
+                    <input type="hidden" value ="{{ s.id }}" name = "sid"/>
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" class="btn btn-warning" value="Edit" name="edit" id="{{ s.title }}-edit">
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" class="btn btn-warning" value="Delete Survey" name="delete" id="{{ s.title }}-delete">
+                </div>
+             </div>
+        </form>
+     {% endfor %}
+{#    <div class="row justify-content-center">#}
+{#        <div class="col-sm-3">#}
+{#            <input type="radio" value="active" id="active1" name="active">#}
+{#        </div>#}
+{#        <div class="col-sm-3">#}
+{#            <input type="text" value="Survey 1" />#}
+{#        </div>#}
+{#        <div class="col-sm-3" >#}
+{#            <button type="button" class="btn btn-warning" style="width:100px;" onclick="window.location.href = 'http://127.0.0.1:8000/admin/manage_question/1/'">Edit</button>#}
+{#        </div>#}
+{#        <div class="col-sm-3">#}
+{#            <input type="button" class="btn btn-warning" style="width:100px;" value="Delete" onclick=""/><br/>#}
+{#        </div>#}
+{#    </div>#}
 
     <br>
     <br/>
