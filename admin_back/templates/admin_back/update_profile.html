@@ -47,7 +47,6 @@
                      <span class="invalid-feedback">{{ err }}</span>
                  {% endfor %}
              </div>
-
                  <div class="form-group">
                 <label for="{{ form.username.id_for_label_tag}}">
                     {{ form.username.label }}
@@ -68,6 +67,7 @@
                      <span class="invalid-feedback">{{ err }}</span>
                  {% endfor %}
              </div>
+
                  <div class="form-group">
                 <label for="{{ form.email.id_for_label_tag}}">
                     {{ form.email.label }}
@@ -85,6 +85,46 @@
                                 {% endif %}
 
                  {% for err in form.email.errors %}
+                     <span class="invalid-feedback">{{ err }}</span>
+                 {% endfor %}
+             </div>
+                <div class="form-group">
+                <label for="{{ form.password1.id_for_label_tag}}">
+                    {{ form.password1.label }}
+                </label>
+                 <input type="password" id="{{ form.password1.id_for_label }}"
+                            name="{{ form.password1.html_name }}"
+                                {% if form.password1.field.required %}required{% endif %}
+                                     class="form-control{% if form.password1.errors %} is-invalid{% endif %}"
+                                        value="{% if form.password1.value %}{{ form.password1.value }}
+                                {% endif %}">
+                                {% if form.password1.help_text %}
+                                    <small class="text-muted">
+                                        {{ form.password1.help_text }}
+                                    </small>
+                                {% endif %}
+
+                 {% for err in form.password1.errors %}
+                     <span class="invalid-feedback">{{ err }}</span>
+                 {% endfor %}
+             </div>
+                 <div class="form-group">
+                <label for="{{ form.password2.id_for_label_tag}}">
+                    {{ form.password2.label }}
+                </label>
+                 <input type="password" id="{{ form.password2.id_for_label }}"
+                            name="{{ form.password2.html_name }}"
+                                {% if form.password2.field.required %}required{% endif %}
+                                     class="form-control{% if form.password2.errors %} is-invalid{% endif %}"
+                                        value="{% if form.password2.value %}{{ form.password2.value }}
+                                {% endif %}">
+                                {% if form.password2.help_text %}
+                                    <small class="text-muted">
+                                        {{ form.password2.help_text }}
+                                    </small>
+                                {% endif %}
+
+                 {% for err in form.password2.errors %}
                      <span class="invalid-feedback">{{ err }}</span>
                  {% endfor %}
              </div>

@@ -46,7 +46,7 @@ class RegisterForm(forms.Form):
 class CreateUserForm(UserCreationForm):
     def clean_email(self):
         data = self.cleaned_data['email']
-        if "@mtu.edu" not in data:   # any check you need
+        if "@mtu.edu" not in data:  # any check you need
             raise forms.ValidationError("Must be a MTU email address")
         return data
 
@@ -54,4 +54,16 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
-#class EditProfileForm(UserChangeForm):
+
+class EditProfileForm(UserChangeForm):
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if "@mtu.edu" not in data:  # any check you need
+            raise forms.ValidationError("Must be a MTU email address")
+        return data
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email']
+
+        "'password1', 'password2']"
