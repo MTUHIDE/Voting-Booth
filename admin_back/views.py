@@ -175,7 +175,7 @@ def manage_survey(request):
         survey = Survey.objects.get(id=id)
         if "edit" in request.POST:
             request.method = None
-            return manage_question(request, id)
+            return redirect('admin_back:manage_question', survey_id=id)
         elif "delete" in request.POST:
             survey.delete()
 
