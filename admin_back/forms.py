@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
@@ -58,7 +58,7 @@ class CreateUserForm(UserCreationForm):
 class EditProfileForm(UserChangeForm):
     def clean_email(self):
         data = self.cleaned_data['email']
-        if "@mtu.edu" not in data:  # any check you need
+        if "@mtu.edu" not in data and data is not "":  # any check you need
             raise forms.ValidationError("Must be a MTU email address")
         return data
 
@@ -66,4 +66,10 @@ class EditProfileForm(UserChangeForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']
 
-        "'password1', 'password2']"
+    # UsernameField = forms.CharField(required=False)
+
+
+class EditPasswordForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = ['old_password', 'new_password1', 'new_password2']

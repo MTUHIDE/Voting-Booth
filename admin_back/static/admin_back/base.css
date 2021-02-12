@@ -10,13 +10,19 @@
     font-weight: bold;
     vertical-align: middle;
     overflow: auto;
-
 }
-
-.top-banner:hover{
+.top-banner:not(.title):hover{
     color: rgb(224 168 0);
 }
-
+.top-banner-title{
+    display: table-cell;
+    padding: 5px;
+    color: rgb(252,206,1);
+    font-size: 30px;
+    font-weight: bold;
+    vertical-align: middle;
+    overflow: auto;
+}
 .logo{
     width: 60px;
 }

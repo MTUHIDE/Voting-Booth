@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.contrib import messages, auth
 from django.http import JsonResponse
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.contrib.auth import authenticate, logout, login
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm, SetPasswordForm
+from django.contrib.auth import authenticate, logout, login, update_session_auth_hash
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -14,7 +14,7 @@ import urllib
 import json
 import requests
 
-from .forms import QuestionForm, SurveyForm, UserCreationForm, CreateUserForm
+from .forms import QuestionForm, SurveyForm, UserCreationForm, CreateUserForm, EditProfileForm
 from .models import Question, Survey
 
 
@@ -46,12 +46,12 @@ def registration(request):
     context = {'form': form}
     return render(request, 'admin_back/user_registration.html', context)
 
+
 def edit_user(request):
-    form = UserChangeForm()
+    form = EditProfileForm()
 
     if request.method == "POST":
-        form = UserChangeForm(request.POST, instance=request.user)
-
+        form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('admin_back:dashboard')
@@ -60,6 +60,21 @@ def edit_user(request):
     return render(request, 'admin_back/update_profile.html', context)
 
 
+def change_password(request):
+
+    if request.method == "POST":
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('admin_back:dashboard')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = PasswordChangeForm(user=request.user)
+    context = {'form': form}
+    return render(request, 'admin_back/change_password.html', context)
 
 
 '''
@@ -79,13 +94,15 @@ def registration(request):
 
 '''
 
+
 def email(request):
     subject = 'Thank you for registering to our site'
     message = ' it  means a world to us '
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['receiver@gmail.com',]
+    recipient_list = ['receiver@gmail.com', ]
     send_mail(subject, message, email_from, recipient_list)
     return redirect('redirect to a new page')
+
 
 @login_required
 def dashboard(request):
@@ -96,6 +113,8 @@ def dashboard(request):
 def loginauth(request):
     context = {}
     return render(request, 'admin_back/loginauth.html', context)
+
+
 '''
 def forgotpass(request):
     context = {}
@@ -109,6 +128,8 @@ def password_done(request):
     context = {}
     return render(request, 'admin_back/password_reset_confirm', context)
 '''
+
+
 @login_required
 def create_survey(request):
     if request.method == 'POST':
@@ -125,6 +146,7 @@ def create_survey(request):
     context = {}
     return render(request, 'admin_back/create_survey.html', context)
 
+
 @login_required
 def manage_question(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
@@ -135,15 +157,15 @@ def manage_question(request, survey_id):
     context = {'detail': info,
                'survey_id': survey_id,
                'survey_name': survey_name,
-              # 'choices': choices
+               # 'choices': choices
                }
 
     if request.method == 'POST':
         if 'add question' in request.POST:
             template = loader.get_template('admin_back/create_question.html')
-            #return HttpResponse(template.render(context, request))
+            # return HttpResponse(template.render(context, request))
             return redirect('admin_back:create_question', survey_id=survey.id)
-            #return redirect('admin_back:manage_question', survey_id=survey.id)
+            # return redirect('admin_back:manage_question', survey_id=survey.id)
         elif 'edit' in request.POST:
             data = request.POST
             id = data.get("qid", "0")
@@ -165,6 +187,7 @@ def manage_question(request, survey_id):
 
     return render(request, 'admin_back/manageQuestions.html', context)
 
+
 @login_required
 def manage_survey(request):
     info = Survey.objects.all()
@@ -181,6 +204,7 @@ def manage_survey(request):
 
     return render(request, 'admin_back/manage_survey.html', context)
 
+
 @login_required
 def create_question(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
@@ -196,7 +220,7 @@ def create_question(request, survey_id):
 
             question.save()
 
-            #redirect to manage questions page
+            # redirect to manage questions page
             return redirect('admin_back:manage_question', survey_id=survey.id)
 
     context = {'survey_name': survey_name}
@@ -205,7 +229,6 @@ def create_question(request, survey_id):
 
 
 def home(request):
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -237,11 +260,13 @@ def home(request):
     context = {}
     return render(request, 'admin_back/home.html', context)
 
+
 @login_required
 def logout_User(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect('admin_back:home')
+
 
 @login_required
 def form_test(request):
@@ -257,8 +282,11 @@ def form_test(request):
 
     context = {'form': form}
     return render(request, 'admin_back/form_test.html', context)
+
+
 def redirect_to_home(request):
     return HttpResponseRedirect('admin')
+
 
 '''
 def results(request):
@@ -272,6 +300,7 @@ def results(request):
    
    return render(request, 'admin_back/results.html', context)
 '''
+
 
 @login_required
 def results(request):
@@ -293,6 +322,6 @@ def results(request):
     resultdata = {'survey': survey,
                   'detail': info,
                   'display': display}
-    #print(resultdata)
-    #print(request)
+    # print(resultdata)
+    # print(request)
     return render(request, 'admin_back/results.html', resultdata)
