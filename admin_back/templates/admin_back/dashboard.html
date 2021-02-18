@@ -4,7 +4,8 @@
 {% block styles %}
     {{ block.super }}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'admin_back/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'admin_back/dashboard.css' %}" xmlns:width="http://www.w3.org/1999/xhtml"
+      xmlns:width="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml">
 {% endblock %}
 
 <!-- Title bar Dashboard -->
@@ -15,54 +16,41 @@
 <!-- Card view -->
 
 <div class="container">
-    <div class="row">
-     <div class="col-sm-3">
-        <div class="card" style="width:250px">
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+         <div class="card mx-auto" style="width:250px" >
              <a href="http://127.0.0.1:8000/admin/create_survey/">
              <img class="card-img-top" src="{% static 'admin_back/assets/HuskyIcon_OneColor_Gold.png'%}" alt="Card image" style="width:100%">
              </a>
              <div class="card-body">
              <h4 class="card-title">Create Survey</h4>
-             <p class="card-text">Each survey taken should have a unique ID for it. ID should be integer-numbers-only.</p>
+             <p class="card-text">Each of the surveys taken should have a unique ID for it. The ID should be integer-numbers-only.</p>
              <a href="http://127.0.0.1:8000/admin/create_survey/" class="btn btn-warning">View details</a>
              </div>
-        </div>
-     </div>
-
-     <div class="col-sm-3">
-        <div class="card" style="width:250px">
-            <a href="http://127.0.0.1:8000/admin/create_question/1/">
-            <img class="card-img-top" src="{% static 'admin_back/assets/HuskyIcon_OneColor_Gold.png'%}" alt="Card image" style="width:100%">
-            </a>
-            <div class="card-body">
-            <h4 class="card-title">Create Question</h4>
-            <p class="card-text">Before creating any new question, make sure you have a survey ID attached to it.</p>
-            <a href="http://127.0.0.1:8000/admin/create_question/1/" class="btn btn-warning">View details</a>
-            </div>
          </div>
-     </div>
+        </div>
 
-        <div class="col-sm-3">
-         <div class="card" style="width:250px">
+        <div class="col-sm-4">
+         <div class="card mx-auto" style="width:250px">
             <img class="card-img-top" src="{% static 'admin_back/assets/HuskyIcon_OneColor_Gold.png'%}" alt="Card image" style="width:100%">
             <div class="card-body">
             <h4 class="card-title">Manage Surveys</h4>
             <p class="card-text">You can view all of the surveys here (Only 1 can be active at a time) Note: Manage Questions Page can also be found in here.</p>
             <a href="http://127.0.0.1:8000/admin/manage_survey/" class="btn btn-warning">View details</a>
+            </div>
          </div>
         </div>
-      </div>
 
-      <div class="col-sm-3">
-         <div class="card" style="width:250px">
+        <div class="col-sm-4">
+         <div class="card mx-auto" style="width:250px">
             <img class="card-img-top" src="{% static 'admin_back/assets/HuskyIcon_OneColor_Gold.png'%}" alt="Card image" style="width:100%">
             <div class="card-body">
             <h4 class="card-title">Check Results</h4>
             <p class="card-text">You can check the results for the survey. The results will be shown in percent for each given choice.</p>
             <a href="http://127.0.0.1:8000/admin/results/" class="btn btn-warning">View details</a>
+            </div>
          </div>
         </div>
-      </div>
     </div>
 
 
