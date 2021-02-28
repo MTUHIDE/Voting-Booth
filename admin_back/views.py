@@ -192,18 +192,22 @@ def manage_question(request, survey_id):
 def manage_survey(request):
     info = Survey.objects.all()
     context = {"surveys": info}
-
     if request.method == "POST":
         id = request.POST.get("sid", "0")
         survey = Survey.objects.get(id=id)
         if "edit" in request.POST:
             request.method = None
             return redirect('admin_back:manage_question', survey_id=id)
+        elif "active" in request.POST:
+            for each in Survey.objects.all():
+                each.state = 0
+                each.save()
+            survey.state = 1
+            survey.save()
         elif "delete" in request.POST:
             survey.delete()
 
     return render(request, 'admin_back/manage_survey.html', context)
-
 
 @login_required
 def create_question(request, survey_id):
