@@ -61,7 +61,6 @@ def edit_user(request):
 
 
 def change_password(request):
-
     if request.method == "POST":
         form = PasswordChangeForm(data=request.POST, user=request.user)
 
@@ -138,7 +137,10 @@ def create_survey(request):
         if form.is_valid():
             survey = Survey()
             survey.title = form.cleaned_data['survey_name']
-
+            for each in Survey.objects.all():
+                each.state = 0
+                each.save()
+            survey.state = 1
             survey.save()
 
             return redirect('admin_back:create_question', survey_id=survey.id)
@@ -204,10 +206,12 @@ def manage_survey(request):
                 each.save()
             survey.state = 1
             survey.save()
+            return redirect('admin_back:manage_survey')
         elif "delete" in request.POST:
             survey.delete()
 
     return render(request, 'admin_back/manage_survey.html', context)
+
 
 @login_required
 def create_question(request, survey_id):
