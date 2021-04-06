@@ -209,6 +209,9 @@ def manage_survey(request):
             return redirect('admin_back:manage_survey')
         elif "delete" in request.POST:
             survey.delete()
+        elif "launch" in request.POST:
+            request.method = None
+            return redirect('admin_back:take_survey', survey_id=id)
 
     return render(request, 'admin_back/manage_survey.html', context)
 
@@ -333,3 +336,54 @@ def results(request):
     # print(resultdata)
     # print(request)
     return render(request, 'admin_back/results.html', resultdata)
+
+@login_required
+def take_survey(request, survey_id):
+    survey = Survey.objects.get(id=survey_id)
+    survey_name = survey.title
+    info = Question.objects.all()
+    question_id = 1
+
+    context = {'detail': info,
+               'survey_id': survey_id,
+               'survey_name': survey_name,
+               'question_id': question_id
+               }
+
+    if 'start' in request.POST:
+        return redirect('admin_back:display_question', survey_id, question_id)
+        # return render(request, 'admin_back/display_question.html', context)
+
+    return render(request, 'admin_back/take_survey.html', context)
+
+@login_required
+def display_question(request, survey_id, question_id):
+    survey = Survey.objects.get(id=survey_id)
+    survey_name = survey.title
+    question = Question.objects.get(id=question_id)
+
+    context = {'detail': question,
+               'survey_id': survey_id,
+               'survey_name': survey_name,
+               'question_id': question_id + 1
+               }
+
+    if request.method == 'POST':
+        if 'no' in request.POST:
+            data = request.POST
+            id = data.get("qid", "0")
+            question = Question.objects.get(id=id)
+            question.votes += 1
+            print(question.votes - question.confirms)
+        elif 'yes' in request.POST:
+            data = request.POST
+            id = data.get("qid", "0")
+            question = Question.objects.get(id=id)
+            question.confirms += 1
+            question.votes += 1
+            print(question.confirms)
+
+        question.save()
+        return render(request, 'admin_back/display_question.html', context)
+
+    return render(request, 'admin_back/take_survey.html', context)
