@@ -24,20 +24,7 @@ def registration(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
 
-        ''' Begin reCAPTCHA validation '''
-        recaptcha_response = request.POST.get('g-recaptcha-response')
-        url = 'https://www.google.com/recaptcha/api/siteverify'
-        values = {
-            'secret': settings.RECAPTCHA_SECRET_KEY,
-            'response': recaptcha_response
-        }
-        data = urllib.parse.urlencode(values).encode()
-        req = urllib.request.Request(url, data=data)
-        response = urllib.request.urlopen(req)
-        result = json.loads(response.read().decode())
-        ''' End reCAPTCHA validation '''
-
-        if form.is_valid() and result['success']:
+        if form.is_valid():
             form.save()
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account was created for ' + user)
