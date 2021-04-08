@@ -13,6 +13,7 @@ from functools import wraps
 import urllib
 import json
 import requests
+from django.urls import reverse
 
 from .forms import QuestionForm, SurveyForm, UserCreationForm, CreateUserForm, EditProfileForm
 from .models import Question, Survey
@@ -178,6 +179,8 @@ def manage_question(request, survey_id):
             holder.save()
             print(before)
             print(after)
+            print(holder.id)
+
         elif 'delete' in request.POST:
             data = request.POST
             id = data.get("qid", "0")
@@ -188,6 +191,7 @@ def manage_question(request, survey_id):
             return render(request, 'admin_back/manageQuestions.html', context)
 
     return render(request, 'admin_back/manageQuestions.html', context)
+
 
 
 @login_required
@@ -342,15 +346,29 @@ def take_survey(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
     survey_name = survey.title
     info = Question.objects.all()
-    question_id = 1
+    print(info)
+    questionid_list = []
+    for each in Question.objects.all():
+        if each.survey_id == survey_id:
+            questionid_list.append(each.id)
+            print(each.id)
+
+    question_id = questionid_list[0]
+    questionid_list.pop(0)
+
+    # numofquestions = 0
+    # for _ in info:
+    #     numofquestions = numofquestions + 1
 
     context = {'detail': info,
                'survey_id': survey_id,
                'survey_name': survey_name,
-               'question_id': question_id
+                'question_id': question_id,
+               'questionid_list': questionid_list
                }
 
     if 'start' in request.POST:
+        request.session['questionid_list'] = questionid_list
         return redirect('admin_back:display_question', survey_id, question_id)
         # return render(request, 'admin_back/display_question.html', context)
 
@@ -360,12 +378,28 @@ def take_survey(request, survey_id):
 def display_question(request, survey_id, question_id):
     survey = Survey.objects.get(id=survey_id)
     survey_name = survey.title
-    question = Question.objects.get(id=question_id)
+    info = Question.objects.all()
+    # print(questionid_list)
+    # print(question_id)
+    # for each in info:
+    #     if each.survey_id == survey_id:
+    #         print("question in survey: ")
+    #         print(each.id)
+    #         print(each.text)
+    #     if each.id == questionid_list[0]:
+    #         print("question in list: ")
+    #         print(each.id)
+    #         print("qustion text in list: ")
+    #         print(each.text)
 
-    context = {'detail': question,
+    # for each in info:
+    #     each.display = 0;
+    #     if each.id == question_id;
+    context = {'detail': info,
                'survey_id': survey_id,
                'survey_name': survey_name,
-               'question_id': question_id + 1
+               'question_id': question_id,
+               'questionid_list': request.session['questionid_list']
                }
 
     if request.method == 'POST':
@@ -378,12 +412,36 @@ def display_question(request, survey_id, question_id):
         elif 'yes' in request.POST:
             data = request.POST
             id = data.get("qid", "0")
+            print(id)
             question = Question.objects.get(id=id)
             question.confirms += 1
             question.votes += 1
             print(question.confirms)
 
         question.save()
-        return render(request, 'admin_back/display_question.html', context)
+        questionid_list = request.session['questionid_list']
+        if not questionid_list:
+            return redirect('admin_back:end_survey', survey_id)
+        else:
+            question_id = questionid_list[0]
+        questionid_list.pop(0)
+        request.session['questionid_list'] = questionid_list
+        return redirect('admin_back:display_question', survey_id, question_id)
 
-    return render(request, 'admin_back/take_survey.html', context)
+    return render(request, 'admin_back/display_question.html', context)
+
+@login_required
+def end_survey(request, survey_id):
+    survey = Survey.objects.get(id=survey_id)
+    survey_name = survey.title
+    info = Question.objects.all()
+
+    context = {'detail': info,
+               'survey_id': survey_id,
+               'survey_name': survey_name,
+               }
+
+    if 'start' in request.POST:
+        return redirect('admin_back:take_survey', survey_id=survey_id)
+
+    return render(request, 'admin_back/end_survey.html', context)
