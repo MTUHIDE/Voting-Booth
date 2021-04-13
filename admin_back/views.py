@@ -155,7 +155,7 @@ def manage_question(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
     survey_name = survey.title
     info = Question.objects.all()
-    print(survey_id)
+    # print(survey_id)
 
     context = {'detail': info,
                'survey_id': survey_id,
@@ -177,16 +177,16 @@ def manage_question(request, survey_id):
             holder.text = data.get("replace", "0")
             after = holder.text
             holder.save()
-            print(before)
-            print(after)
-            print(holder.id)
+            # print(before)
+            # print(after)
+            # print(holder.id)
 
         elif 'delete' in request.POST:
             data = request.POST
             id = data.get("qid", "0")
             holder = Question.objects.get(id=id)
             holder.delete()
-            print(id)
+            # print(id)
 
             return render(request, 'admin_back/manageQuestions.html', context)
 
@@ -328,8 +328,8 @@ def results(request):
             display = data.get("surveys")
     elif request.method == 'GET':
         display = survey[0]
-        print(display)
-        print(survey[0])
+        # print(display)
+        # print(survey[0])
     else:
         if not survey:
             display = ''
@@ -346,12 +346,12 @@ def take_survey(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
     survey_name = survey.title
     info = Question.objects.all()
-    print(info)
+    # print(info)
     questionid_list = []
     for each in Question.objects.all():
         if each.survey_id == survey_id:
             questionid_list.append(each.id)
-            print(each.id)
+            # print(each.id)
 
     question_id = questionid_list[0]
     questionid_list.pop(0)
@@ -408,15 +408,15 @@ def display_question(request, survey_id, question_id):
             id = data.get("qid", "0")
             question = Question.objects.get(id=id)
             question.votes += 1
-            print(question.votes - question.confirms)
+            # print(question.votes - question.confirms)
         elif 'yes' in request.POST:
             data = request.POST
             id = data.get("qid", "0")
-            print(id)
+            # print(id)
             question = Question.objects.get(id=id)
             question.confirms += 1
             question.votes += 1
-            print(question.confirms)
+            # print(question.confirms)
 
         question.save()
         questionid_list = request.session['questionid_list']

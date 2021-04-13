@@ -13,8 +13,8 @@
 <form method= "post">
                 {% csrf_token %}
                     <div class="w3-container w3-center w3-padding-32" id>
-                        <h2 class="question-text">Thank You!</h2>
-                        <h3>Restarting survey in <div id="counter">10</div> seconds</h3>
+                        <h2 class="question-text">Thank you for completing our survey!</h2>
+                        <h3 style="padding: 30px 0px;">Restarting survey in <div id="counter">10</div> seconds</h3>
 
                         <script>
                             setInterval(function() {
@@ -27,7 +27,7 @@
                              }, 1000);
                         </script>
                     </div>
-                    <div class="row row-justify-content-center">
+                    <div class="row row-justify-content-center button-container">
                         <div class="col-sm-6" style="text-align: center">
                             <input type="hidden" class="btn btn-danger btn-xl" value= "No" name="no"/>
                         </div>

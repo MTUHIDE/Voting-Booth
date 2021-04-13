@@ -94,3 +94,30 @@ input{
   color: black;
   font-size: 50px;
 }
+
+#dashboard {
+  margin-bottom: 40px;
+}
+
+#dashboard .card{
+  border-width: 5px !important;
+  background-color: #212529 !important;
+  border-radius: 10px !important;
+  box-shadow: 8px 8px 5px #00000059;
+}
+
+.padding-80{
+  padding: 0.01em 80px !important;
+}
+
+.button-container{
+  position: fixed;
+  bottom: 10%;
+  width: 100%
+}
+
+.center-question{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+

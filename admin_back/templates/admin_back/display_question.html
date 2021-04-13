@@ -13,12 +13,12 @@
                 {%if s.id == question_id %}
                 <form method= "post">
                 {% csrf_token %}
-                    <div class="w3-container w3-center w3-padding-32" id>
+                    <div class="w3-container w3-center w3-padding-32 padding-80 center-question">
                         <h2 class="question-text">{{ s.text }}</h2>
                     </div>
                     <input type="hidden" value="{{ s.id }}" name="qid"/>
                     <input type="hidden" value="{{ s.text }}" name="qtext"/>
-                    <div class="row row-justify-content-center">
+                    <div class="row row-justify-content-center button-container">
                         <div class="col-sm-6" style="text-align: center">
                             <input type="submit" class="btn btn-danger btn-xl" value= "No" name="no"/>
                         </div>
