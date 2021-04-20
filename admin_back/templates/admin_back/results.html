@@ -21,20 +21,16 @@ tr:nth-child(even) {
 </style>
 <h2>Survey Table</h2>
     <label for="surveys">Choose a survey to see the results:</label>
-    <select name="surveys" id="surveys" form="swap">
+    <form method= "post" name="selected">
+    {% csrf_token %}
+    <select name="surveys" id="surveys" onchange="document.selected.submit();">
+        <option value="none" selected disabled hidden> Select an Option</option>
         {% for x in survey %}
-            <form method= "post">
-{#            {% csrf_token %}#}
                 <option value="{{ x }}">{{ x }}</option>
-
-            </form>
         {% endfor %}
     </select>
-    <form method = "post" id="swap">
-        {% csrf_token %}
-        <input type="button" class="btn btn-warning" value="Send" name="send"/>
-
     </form>
+
  <table>
      <tr>
          <th>Survey Name</th>

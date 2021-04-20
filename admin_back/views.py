@@ -308,15 +308,21 @@ def results(request):
 def results(request):
     info = Question.objects.all()
     survey = Survey.objects.all()
-
+    print(request.method)
     if request.method == 'POST':
-        if 'send' in request.POST:
+        print(request.POST)
+        if not survey:
+            display = ''
+        else:
             data = request.POST
             display = data.get("surveys")
     elif request.method == 'GET':
-        display = survey[0]
-        # print(display)
-        # print(survey[0])
+        print(request.GET)
+        if not survey:
+            display = ''
+        else:
+            display = survey[0]
+        print(display)
     else:
         if not survey:
             display = ''
