@@ -13,7 +13,7 @@ The project makes use of Django which is a Python based web framework.
     <li>Add the following packages/libraries to the project:
         <ul>
             <li>Cython</li>
-            <li>Django <-- download first</li>
+            <li>Django <-- download first (v3.1.8)</li>
             <li>PyJWT</li>
             <li>asgiref</li>
             <li>certifi</li>
