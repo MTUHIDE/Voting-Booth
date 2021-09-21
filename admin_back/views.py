@@ -400,6 +400,7 @@ def display_question(request, survey_id, question_id):
             data = request.POST
             id = data.get("qid", "0")
             question = Question.objects.get(id=id)
+            question.no += 1
             question.votes += 1
             # print(question.votes - question.confirms)
         elif 'yes' in request.POST:
@@ -407,7 +408,7 @@ def display_question(request, survey_id, question_id):
             id = data.get("qid", "0")
             # print(id)
             question = Question.objects.get(id=id)
-            question.confirms += 1
+            question.yes += 1
             question.votes += 1
             # print(question.confirms)
 
