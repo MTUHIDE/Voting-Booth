@@ -1,40 +1,55 @@
-# ask-meagain
-
-ALOT of work needs to be done here, and this is about as basic as it can get, but here's a starting place
-To run the application you need to:
-
-1. Install docker
-2. Make sure the docker daemon is up and running
-3. Clone the repo
-4. Run the "start.sh" script (as root) to start running the docker container
-
-You should now be running the application locally on localhost:7697
-
-### Docker Container Notes
-Docker is confusing, and hopefully once we get it right we won't have to mess with it much/at all. Some helpful hints for messing around with our containers below. All commands should be run in a bash shell.
-
-* Stop the container with `# bash stop.sh`
-* View all running containers: `# docker ps`
-  * To view all containers on the system `# docker ps -a`
-  * To view all docker images on the system `# docker image ls -a`
-* Fan of the Youtube Channel, "Whats Inside"? Use `# docker exec -it <container-ID or name> /bin/bash` to open a shell inside our container
-
-### Specific Notes for start.sh
-Alot of modifications have been made to start.sh since it existed as just a "docker run" command, so I'm listing how to use it here.
-
-* To get up and running for development as fast as possible: `# bash start.sh`
-    * This will start the container while mounting your local ./app directory to the container's /app directory. This allows for real time code changes to take place in the app with just a refresh. In order to make this work, uwsgi has to be cut out (done for you) and the flask app run directly from python, so the end result means it won't be running in exactly production mode.
-* To run in production mode use the tag: `-l` or `--legacy`
-    * This is what should be used to deploy for full application testing, and runs the app through the correct pipeline (flask -> uwsgi -> nginx)
-* To rebuild the container (if you make non-python related changes), use this tag: `-r`
-    * I expect almost no-one will ever have to use this, but you never know
-* Please use only one tag at a time :)
-
-### SQL/DB Notes
-* Sqlite3 support has now been added via SQLAlchemy. Documentation on how to use SQLAlchemy here: http://flask-sqlalchemy.pocoo.org/2.3/
-* Bootstrapped test data coming soon
-
-### ---Some more notes---
-* Currently, the conf folder takes no effect
-* Built using notes on the Docker image page [here](https://hub.docker.com/r/tiangolo/uwsgi-nginx-flask/ "Image Documentation")
-* To add nginx configurations, Dockerfile modifications need to be made, copy .conf files to /etc/nginx/conf.d/
+<h1>Voting Booth</h1>
+Last Updated: 9/21/21
+<h2>Introduction</h2>
+Voting Booth is meant to be a mobile application that allows USG to survey the student population. 
+The project makes use of Django which is a Python based web framework.
+<h2>Setup: https://youtu.be/4Kgu8OnjrJw </h2>
+<ol>
+    <li>Download or Open PyCharm by JetBrains</li>
+    <li>Select new project from Git or click the Git dropdown and select clone</li>
+    <li>On the Voting Booth github page select the green code button and copy the link</li>
+    <li>Paste the link in the URL section on PyCharm</li>
+    <li>Once everything is finished go to File->Settings->Project:ask-meagain->Python Interpreter</li>
+    <li>Add the following packages/libraries to the project:
+        <ul>
+            <li>Cython</li>
+            <li>Django <-- download first (v3.1.8)</li>
+            <li>PyJWT</li>
+            <li>asgiref</li>
+            <li>certifi</li>
+            <li>cffi</li>
+            <li>chardet</li>
+            <li>charset-normalizer</li>
+            <li>cryptography</li>
+            <li>defusedxml</li>
+            <li>django-social-auth</li>
+            <li>httplib2</li>
+            <li>idna</li>
+            <li>oauth2</li>
+            <li>oauthlib</li>
+            <li>pip</li>
+            <li>pycparser</li>
+            <li>pyparsing</li>
+            <li>python-openid</li>
+            <li>python3-openid</li>
+            <li>pytz</li>
+            <li>pyusb</li>
+            <li>requests</li>
+            <li>requests-oauthlib</li>
+            <li>setuptools</li>
+            <li>six</li>
+            <li>social-auth-app-django <-- download second</li>
+            <li>social-auth-core</li>
+            <li>sqlparse</li>
+            <li>urlib3</li>
+        </ul>
+    </li>
+    <li>Switch to the develop branch in the bottom right corner of PyCharm (if applicable)</li>
+    <li>In the terminal window type "python manage.py runserver 8000"</li>
+    <li>Click the link that appears in the terminal window</li>
+</ol>
+<h2>Other Notes</h2>
+<ul>
+    <li>https://www.djangoproject.com/ is your best start place for learning how to do something in Django</li>
+    <li>Running makemigrations (see database_doc.md) should be tried early on when troubleshooting an unexpected issue</li>
+</ul>
