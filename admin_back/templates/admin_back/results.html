@@ -43,8 +43,8 @@ tr:nth-child(even) {
              {%if s.survey == display or  s.survey.title == display%}
                 <td>{{ s.survey }}</td>
                 <td>{%if s.text != '' and s.state != null %}{{ s.text}}{% else %}Question does not exist{% endif %}</td>
-                <td>{{ s.confirms }}</td>
-                <td>{{ s.votes }}</td>
+                <td>{{ s.yes }}</td>
+                <td>{{ s.no }}</td>
                 </tr>
              {% endif %}
        {% endfor %}

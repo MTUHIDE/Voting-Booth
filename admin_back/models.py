@@ -39,8 +39,9 @@ class Survey(models.Model):
 class Question(models.Model):
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
     text = models.CharField(max_length=300)
-    confirms = models.IntegerField(default=0)
-    votes = models.IntegerField(default=0)
+    yes = models.IntegerField(default=0)  # Count num of yes votes
+    no = models.IntegerField(default=0)  # Count num of no votes
+    votes = models.IntegerField(default=0)  # Count num of total votes
     state = models.IntegerField(choices=QuestionState.choices(), default=QuestionState.ACTIVE)
 
    # def __str__(self):
