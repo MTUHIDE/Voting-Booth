@@ -47,10 +47,10 @@ various attributes of the tables.
 |-----------|---------------|----------------|---------------------------------------------------|
 | survey    | Survey        | Foreign Key    | The survey this question belongs to               |
 | text      | String        | max_length=300 | The text of the question                          |
-| confirms      | Integer        | default=0 | How many "yes" votes received                       |
-| votes      | Integer        | default=0 | How many total votes received                         |
-| state     | QuestionState | default=ACTIVE               | Whether the question is active in a survey or not |
-
+| yes       | Integer       | default=0      | How many "yes" votes received                       |
+| votes     | Integer       | default=0      | How many total votes received                         |
+| state     | QuestionState | default=ACTIVE | Whether the question is active in a survey or not |
+| no        | Integer       | default=0      | How many "no" votes received
 ####Taken
 | Attribute | Field Type | Properties    | Comments                                             |
 |-----------|------------|---------------|------------------------------------------------------|
@@ -60,7 +60,7 @@ various attributes of the tables.
 ##Nearby changes/updates
 * Since recently USG told us we only need to support yes/no questions, the need for a choice table is gone.
 Instead, the question table can store the data of how many total and yes votes is received, since the choice is binary.
-The amount of no votes can be calulated by `total - yes`.
+The amount of no votes can be calculated by `total - yes`.
 
 * USG also mentioned that they only intend for one survey to be active at a time, and that should soon be reflected
 in the survey table through some type of `state` attribute similar to the one questions have.
