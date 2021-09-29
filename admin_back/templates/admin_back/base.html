@@ -39,20 +39,20 @@
                     <a class="top-banner" style="font-size: 20px; text-decoration: none;" href="/admin/dashboard">
                         DASHBOARD
                     </a>
-
-                    <a class="top-banner" style="font-size: 20px; text-decoration: none; white-space: nowrap" href="{% url 'logout' %}">
-                        SIGN OUT
-                    </a>
-                     <div class="dropdown" style="position: static;">
+                    <div class="top-banner">
+                        <div class="dropdown" style="position: static; padding-bottom: 9px; ">
                              <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Hello, {{ request.user }}
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-menu dropdown-menu-right" style="top: auto" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="/admin/registration/">Add User</a>
                                 <a class="dropdown-item" href="/admin/update_profile/">Edit User Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/admin/change_password/">Change Password</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
                             </div>
+                        </div>
                     </div>
                 </div>
             {% endif %}
