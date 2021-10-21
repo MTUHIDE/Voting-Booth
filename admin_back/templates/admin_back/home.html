@@ -1,14 +1,14 @@
-
 {% extends 'admin_back/base.html' %}
 
 {% block styles %}
     {{ block.super }}
     {% load static %}
-    <link href= "{% static 'admin_back/base.css'%}" rel="stylesheet">
+    <link href="{% static 'admin_back/base.css' %}" rel="stylesheet">
     <style>
         input::placeholder {
             text-align: left;
         }
+
         .center {
             padding: 120px 0;
         }
@@ -16,58 +16,61 @@
 {% endblock %}
 
 {% block content %}
-<div style="text-align: center" class="center">
-{#    removing as this is provided by base now#}
-{#    <div class="wrapper">#}
-{#        <div class="top-banner">#}
-{#            <img class ="logo" src = "HuskyIcon_OneColor_Gold.png">#}
-{#        </div>#}
-{#        <div class="top-banner" style="padding-bottom: 7px">#}
-{#            Voting Booth Admin Page#}
-{#        </div>#}
-{#    </div>#}
-    <div class="text" style="font-size: 70px">
-        Welcome!
-    </div>
-    <div class="text" style="margin-top: 10px">
-        Sign in using your Michigan Tech username
-    </div>
+    <div style="text-align: center" class="center">
+        {#    removing as this is provided by base now#}
+        {#    <div class="wrapper">#}
+        {#        <div class="top-banner">#}
+        {#            <img class ="logo" src = "HuskyIcon_OneColor_Gold.png">#}
+        {#        </div>#}
+        {#        <div class="top-banner" style="padding-bottom: 7px">#}
+        {#            Voting Booth Admin Page#}
+        {#        </div>#}
+        {#    </div>#}
+        <div class="text" style="font-size: 70px">
+            Welcome!
+        </div>
+        <div class="text" style="margin-top: 10px">
+            Sign in using your Michigan Tech username
+        </div>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-    <div class="login" style="margin-top: 10px">
-     <input type="text" name="username" placeholder="Username" class="form-row" style="margin: auto" tabindex=1>
-    </div>
-    <div style="margin-top: 10px">
-     <input type="password" placeholder="Password" name="password" class="form-row" style="margin: auto;" tabindex=2>
-    </div>
-    <div>
-        {% csrf_token %}
-        {{ form.as_p }}
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="login" style="margin-top: 10px">
+                <input type="text" name="username" placeholder="Username" class="form-row" style="margin: auto"
+                       tabindex=1>
+            </div>
+            <div style="margin-top: 10px">
+                <input type="password" placeholder="Password" name="password" class="form-row" style="margin: auto;"
+                       tabindex=2>
+            </div>
+            <div>
+                {% csrf_token %}
+                {{ form.as_p }}
 
-        <script src='https://www.google.com/recaptcha/api.js'></script>
-    <div style="text-align: center">
-        <div class="g-recaptcha" style="display: inline-block; margin-top: 10px" data-sitekey="6LeGC1EaAAAAAOJfU0WMwwIJpzNeeIk2bWdiL5l5" tabindex=3></div>
-    </div>
+                <script src='https://www.google.com/recaptcha/api.js'></script>
+                <div style="text-align: center">
+                    <div class="g-recaptcha" style="display: inline-block; margin-top: 10px"
+                         data-sitekey="6LeGC1EaAAAAAOJfU0WMwwIJpzNeeIk2bWdiL5l5" tabindex=3></div>
+                </div>
 
-     <button class="btn btn-warning" style="width:180px; margin-bottom: 5px; margin-top: 5px" tabindex=4>
-        Login
-     </button>
-        {% for message in messages %}
-           <p>{{ message }}</p>
-        {% endfor %}
-    </div>
+                <button class="btn btn-warning" style="width:180px; margin-bottom: 5px; margin-top: 5px" tabindex=4>
+                    Login
+                </button>
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
 
-    <div>
-        <a href="http://127.0.0.1:8000/admin/reset_password/" style="margin-left: 140px">Forgot Password?</a>
-    </div>
-    <!-- <p> -- OR -- </p>
+            <div>
+                <a href="http://127.0.0.1:8000/admin/reset_password/" style="margin-left: 140px">Forgot Password?</a>
+            </div>
+            <!-- <p> -- OR -- </p>
     <a href="{% url 'social:begin' 'google-oauth2'%}">
         <button type="button" name="button" class="button" style="font-size:20px; margin-top: 20px;" tabindex=4>Google Login</button>
     </a>
     -->
-    </form>
+        </form>
 
-</div>
+    </div>
 
 {% endblock %}
