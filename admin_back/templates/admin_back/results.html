@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<script>
+    //Counter for the number of questions
+    result_counter = 0;
+    function reset_counter() {
+      result_counter = 0;
+    }
+</script>
+
 <style>
 table {
   font-family: arial, sans-serif;
@@ -18,12 +26,50 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+#responded_yes_label {
+  color:rgb(102, 153, 255);
+  width: 10%;
+}
+
+#responded_no_label {
+  color:rgb(204, 0, 153);
+  width: 10%;
+}
+
+#response_total_label {
+  color:rgb(71, 107, 107);
+}
+
+.survey_name, #survey_name_label {
+  width: 15%;
+}
+
+.survey_question, #survey_question_label {
+  width: 55%;
+}
+
+#response_total_label {
+  width: 10%;
+}
+
+.yes_result {
+  background-color:rgb(102, 153, 255);
+  text-align: right;
+}
+
+.no_result {
+  background-color:rgb(204, 0, 153);
+  text-align: right;
+}
+
 </style>
+
 <h2>Survey Table</h2>
     <label for="surveys">Choose a survey to see the results:</label>
     <form method= "post" name="selected">
     {% csrf_token %}
-    <select name="surveys" id="surveys" onchange="document.selected.submit();">
+    <select name="surveys" id="surveys" onchange="document.selected.submit(); reset_counter();">
         <option value="none" selected disabled hidden> Select an Option</option>
         {% for x in survey %}
                 <option value="{{ x }}">{{ x }}</option>
@@ -33,18 +79,59 @@ tr:nth-child(even) {
 
  <table>
      <tr>
-         <th>Survey Name</th>
-         <th>Question</th>
-         <th>Responded Yes</th>
-         <th>Responded No</th>
+         <th id="survey_name_label">Survey Name</th>
+         <th id="survey_question_label">Question</th>
+         <th id="responded_yes_label">Responded Yes</th>
+         <th id="responded_no_label">Responded No</th>
+         <th id="response_total_label">Total Response</th>
      </tr>
+</table>
+<table>
      <tr>
+         <colgroup>
+             <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%">
+             <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%">
+             <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%">
+             <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%">
+             <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%"> <col width="1%">
+
+         </colgroup>
          {% for s in detail %}
              {%if s.survey == display or  s.survey.title == display%}
-                <td>{{ s.survey }}</td>
-                <td>{%if s.text != '' and s.state != null %}{{ s.text}}{% else %}Question does not exist{% endif %}</td>
-                <td>{{ s.yes }}</td>
-                <td>{{ s.no }}</td>
+                <td class="survey_name">{{ s.survey }}</td>
+                <td class="survey_question">{%if s.text != '' and s.state != null %}{{ s.text}}{% else %}Question does not exist{% endif %}</td>
+                <td class="yes_result">{{ s.yes }}</td>
+                <td class="no_result">{{ s.no }}</td>
+                <td class="total_result"></td>
+                    <script>
+                        //Set yes cell size and unique id
+                        var temp_yes = document.getElementsByClassName("yes_result");
+                        temp_yes[result_counter].id = "yes_result" + result_counter;
+                        if({{ s.yes }} == 0)
+                        {
+                          temp_yes[result_counter].style.display = "none";
+                        } else {
+                          temp_yes[result_counter].colSpan = Math.ceil({{ s.yes }} / ({{ s.yes }} + {{ s.no }}) * 20);
+                        }
+
+                        //set no cell size and unique id
+                        var temp_no = document.getElementsByClassName("no_result");
+                        temp_no[result_counter].id = "no_result" + result_counter;
+                        if({{ s.no }} == 0)
+                        {
+                          temp_no[result_counter].style.display = "none";
+                        } else {
+                          temp_no[result_counter].colSpan = Math.floor({{ s.no }} / ({{ s.yes }} + {{ s.no }}) * 20);
+                        }
+
+                        //set total cell size, unique id, and value
+                        var temp_total = document.getElementsByClassName("total_result");
+                        temp_total[result_counter].id = "total_result" + result_counter;
+                        temp_total[result_counter].style.width = "10%";
+                        temp_total[result_counter].innerHTML = {{ s.no }} + {{ s.yes }};
+
+                        result_counter++;
+                    </script>
                 </tr>
              {% endif %}
        {% endfor %}
