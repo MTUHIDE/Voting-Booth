@@ -180,7 +180,6 @@ def manage_question(request, survey_id):
     return render(request, 'admin_back/manageQuestions.html', context)
 
 
-
 @login_required
 def manage_survey(request):
     info = Survey.objects.all()
@@ -334,6 +333,7 @@ def results(request):
     # print(request)
     return render(request, 'admin_back/results.html', resultdata)
 
+
 @login_required
 def take_survey(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
@@ -356,16 +356,14 @@ def take_survey(request, survey_id):
     context = {'detail': info,
                'survey_id': survey_id,
                'survey_name': survey_name,
-                'question_id': question_id,
+               'question_id': question_id,
                'questionid_list': questionid_list
                }
 
-    if 'start' in request.POST:
-        request.session['questionid_list'] = questionid_list
-        return redirect('admin_back:display_question', survey_id, question_id)
-        # return render(request, 'admin_back/display_question.html', context)
+    request.session['questionid_list'] = questionid_list
+    return redirect('admin_back:display_question', survey_id, question_id)
+    # return render(request, 'admin_back/display_question.html', context)
 
-    return render(request, 'admin_back/take_survey.html', context)
 
 @login_required
 def display_question(request, survey_id, question_id):
@@ -423,6 +421,7 @@ def display_question(request, survey_id, question_id):
         return redirect('admin_back:display_question', survey_id, question_id)
 
     return render(request, 'admin_back/display_question.html', context)
+
 
 @login_required
 def end_survey(request, survey_id):
