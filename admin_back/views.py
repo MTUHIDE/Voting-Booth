@@ -320,7 +320,9 @@ def results(request):
         if not survey:
             display = ''
         else:
-            display = survey[0]
+            for x in range(0, len(survey)):
+                if survey[x].state == 1:
+                    display = survey[x]
         print(display)
     else:
         if not survey:
