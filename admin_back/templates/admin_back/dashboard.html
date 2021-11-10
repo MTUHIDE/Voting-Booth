@@ -21,35 +21,39 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
          <div class="card mx-auto text-light" style="width:70%; height: 110%;" >
-             <a href="http://127.0.0.1:8000/admin/create_survey/">
+             <a href="/admin/create_survey/">
              <img class="card-img-top" src="{% static 'admin_back/assets/HuskyIcon_OneColor_Gold.png'%}" alt="Card image" style="width:100%">
              </a>
              <div class="card-body">
              <h4 class="card-title">Create Survey</h4>
              <p class="card-text">Start here to create a new survey and add yes/no questions.<br><br></p>
-             <a href="http://127.0.0.1:8000/admin/create_survey/" class="btn btn-warning text-dark" style="position: absolute; bottom: 0; margin-bottom: 20px; left: 50%; transform: translate(-50%);"><strong>View Details</strong></a>
+             <a href="/admin/create_survey/" class="btn btn-warning text-dark" style="position: absolute; bottom: 0; margin-bottom: 20px; left: 50%; transform: translate(-50%);"><strong>Create Survey</strong></a>
              </div>
          </div>
         </div>
 
         <div class="col-md-4">
          <div class="card mx-auto text-light" style="width:70%; height: 110%;">
+             <a href="/admin/manage_survey/">
             <img class="card-img-top" src="{% static 'admin_back/assets/HuskyIcon_OneColor_Gold.png'%}" alt="Card image" style="width:100%">
-            <div class="card-body">
+            </a>
+             <div class="card-body">
             <h4 class="card-title">Manage and Launch Surveys</h4>
             <p class="card-text">View, edit and launch all surveys and questions.<br></p>
-            <a href="http://127.0.0.1:8000/admin/manage_survey/" class="btn btn-warning text-dark" style="position: absolute; bottom: 0; margin-bottom: 20px; left: 50%; transform: translate(-50%);"><strong>View Details</strong></a>
+            <a href="/admin/manage_survey/" class="btn btn-warning text-dark" style="position: absolute; bottom: 0; margin-bottom: 20px; left: 50%; transform: translate(-50%);"><strong>Manage/Launch</strong></a>
             </div>
          </div>
         </div>
 
         <div class="col-md-4">
          <div class="card mx-auto text-light" style="width:70%; height: 110%;">
+             <a href="/admin/results/">
             <img class="card-img-top" src="{% static 'admin_back/assets/HuskyIcon_OneColor_Gold.png'%}" alt="Card image" style="width:100%">
-            <div class="card-body">
-            <h4 class="card-title">Check Results</h4>
+            </a>
+             <div class="card-body">
+            <h4 class="card-title">View Results</h4>
             <p class="card-text">Check yes, no, and total votes for all surveys.<br></p>
-            <a href="http://127.0.0.1:8000/admin/results/" class="btn btn-warning text-dark" style="position: absolute; bottom: 0; margin-bottom: 20px; left: 50%; transform: translate(-50%);"><strong>View Details</strong></a>
+            <a href="/admin/results/" class="btn btn-warning text-dark" style="position: absolute; bottom: 0; margin-bottom: 20px; left: 50%; transform: translate(-50%);"><strong>View Results</strong></a>
             </div>
          </div>
         </div>

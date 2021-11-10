@@ -22,7 +22,7 @@
         <form method= "post" name="selected">
         {% csrf_token %}
         <select name="surveys" id="surveys" onchange="document.selected.submit(); reset_counter();">
-            <option value="none" selected disabled hidden> Select a Survey</option>
+            <option value="none" selected disabled hidden>Select a Survey</option>
             {% for x in survey %}
                     <option value="{{ x }}">{{ x }}</option>
             {% endfor %}
