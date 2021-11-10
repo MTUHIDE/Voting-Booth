@@ -2,6 +2,12 @@
 
 {% block content %}
 
+{% block styles %}
+    {{ block.super }}
+    {% load static %}
+<link rel="stylesheet" href="{% static 'admin_back/results.css' %}">
+{% endblock %}
+
 <script>
     //Counter for the number of questions
     result_counter = 0;
@@ -9,62 +15,6 @@
       result_counter = 0;
     }
 </script>
-
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-#responded_yes_label {
-  color:rgb(102, 153, 255);
-  width: 10%;
-}
-
-#responded_no_label {
-  color:rgb(204, 0, 153);
-  width: 10%;
-}
-
-#response_total_label {
-  color:rgb(71, 107, 107);
-}
-
-.survey_name, #survey_name_label {
-  width: 15%;
-}
-
-.survey_question, #survey_question_label {
-  width: 55%;
-}
-
-#response_total_label {
-  width: 10%;
-}
-
-.yes_result {
-  background-color:rgb(102, 153, 255);
-  text-align: right;
-}
-
-.no_result {
-  background-color:rgb(204, 0, 153);
-  text-align: right;
-}
-
-
-</style>
 
 <header class="w3-container w3-center w3-padding-32">
     <h1><b>Survey Results</b></h1>

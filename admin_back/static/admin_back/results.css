@@ -1,0 +1,51 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+#responded_yes_label {
+  color:rgb(102, 153, 255);
+  width: 10%;
+}
+
+#responded_no_label {
+  color:rgb(204, 0, 153);
+  width: 10%;
+}
+
+#response_total_label {
+  color:rgb(71, 107, 107);
+}
+
+.survey_name, #survey_name_label {
+  width: 15%;
+}
+
+.survey_question, #survey_question_label {
+  width: 55%;
+}
+
+#response_total_label {
+  width: 10%;
+}
+
+.yes_result {
+  background-color:rgb(102, 153, 255);
+  text-align: right;
+}
+
+.no_result {
+  background-color:rgb(204, 0, 153);
+  text-align: right;
+}
