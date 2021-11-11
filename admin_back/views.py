@@ -372,22 +372,7 @@ def display_question(request, survey_id, question_id):
     survey = Survey.objects.get(id=survey_id)
     survey_name = survey.title
     info = Question.objects.all()
-    # print(questionid_list)
-    # print(question_id)
-    # for each in info:
-    #     if each.survey_id == survey_id:
-    #         print("question in survey: ")
-    #         print(each.id)
-    #         print(each.text)
-    #     if each.id == questionid_list[0]:
-    #         print("question in list: ")
-    #         print(each.id)
-    #         print("qustion text in list: ")
-    #         print(each.text)
 
-    # for each in info:
-    #     each.display = 0;
-    #     if each.id == question_id;
     context = {'detail': info,
                'survey_id': survey_id,
                'survey_name': survey_name,
@@ -396,21 +381,30 @@ def display_question(request, survey_id, question_id):
                }
 
     if request.method == 'POST':
+
         if 'no' in request.POST:
             data = request.POST
             id = data.get("qid", "0")
             question = Question.objects.get(id=id)
             question.no += 1
             question.votes += 1
-            # print(question.votes - question.confirms)
+            print("no")
         elif 'yes' in request.POST:
             data = request.POST
             id = data.get("qid", "0")
-            # print(id)
             question = Question.objects.get(id=id)
             question.yes += 1
             question.votes += 1
-            # print(question.confirms)
+            print("yes")
+        else:
+            RFIDinput = request.POST.get('rfid-input')
+            print(RFIDinput)
+            data = request.POST
+            id = data.get("qid", "0")
+            question = Question.objects.get(id=id)
+            question.yes += 1
+            question.votes += 1
+            print("yes")
 
         question.save()
         questionid_list = request.session['questionid_list']
