@@ -387,14 +387,14 @@ def display_question(request, survey_id, question_id):
 
         elif(len(request.POST.get('rfid-input')) < 13 and len(request.POST.get('rfid-input')) > 3 ): anwser = 'no'
 
-        if 'no' in request.POST:
+        if 'no' in anwser:
             data = request.POST
             id = data.get("qid", "0")
             question = Question.objects.get(id=id)
             question.no += 1
             question.votes += 1
             print("no")
-        elif 'yes' in request.POST:
+        elif 'yes' in anwser:
             data = request.POST
             id = data.get("qid", "0")
             question = Question.objects.get(id=id)
