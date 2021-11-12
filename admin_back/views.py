@@ -382,34 +382,28 @@ def display_question(request, survey_id, question_id):
 
     if request.method == 'POST':
 
-        anwser = request.POST
-        if(len(request.POST.get('rfid-input')) > 13 ): anwser = 'yes'
+        answer = request.POST
 
-        elif(len(request.POST.get('rfid-input')) < 13 and len(request.POST.get('rfid-input')) > 3 ): anwser = 'no'
-
-        if 'no' in anwser:
+        # Process RFID reader input
+        if 'rfid-btn' in answer:
+            if len(request.POST.get('rfid-input')) == 13:
+                answer = 'yes'
+            else:
+                answer = 'no'
+        if 'no' in answer:
             data = request.POST
             id = data.get("qid", "0")
             question = Question.objects.get(id=id)
             question.no += 1
             question.votes += 1
             print("no")
-        elif 'yes' in anwser:
+        elif 'yes' in answer:
             data = request.POST
             id = data.get("qid", "0")
             question = Question.objects.get(id=id)
             question.yes += 1
             question.votes += 1
             print("yes")
-        #else:
-         #   RFIDinput = request.POST.get('rfid-input')
-          #  print(RFIDinput)
-           # data = request.POST
-            #id = data.get("qid", "0")
-            #question = Question.objects.get(id=id)
-            #question.yes += 1
-            #question.votes += 1
-            #print("yes")
 
         question.save()
         questionid_list = request.session['questionid_list']

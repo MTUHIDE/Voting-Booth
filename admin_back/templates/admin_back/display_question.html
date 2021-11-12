@@ -18,13 +18,13 @@
                     </div>
                     <input type="hidden" value="{{ s.id }}" name="qid"/>
                     <input type="hidden" value="{{ s.text }}" name="qtext"/>
+                    <input type="text" name="rfid-input" class="form-row" autofocus="autofocus" style="margin: auto" tabindex=1>
+                    <input type="submit" class="btn" value= "RFID" name="rfid-btn" style="visibility: hidden"/>
                     <div class="row row-justify-content-center button-container">
                         <div class="col-sm-6" style="text-align: center">
-                            <input type="submit" class="btn btn-success btn-xl" value= "RFID" name="rfid-btn"/>
                             <input type="submit" class="btn btn-danger btn-xl" value= "No" name="no"/>
                         </div>
                         <div class="col-sm-6" style="text-align: center">
-                            <input type="text" name="rfid-input" class="form-row" autofocus="autofocus" style="margin: auto" tabindex=1>
                             <input type="submit" class="btn btn-success btn-xl" value= "Yes" name="yes"/>
                         </div>
                     </div>
