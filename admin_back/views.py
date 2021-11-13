@@ -396,14 +396,14 @@ def display_question(request, survey_id, question_id):
             question = Question.objects.get(id=id)
             question.no += 1
             question.votes += 1
-            print("no")
+            # print("no")
         elif 'yes' in answer:
             data = request.POST
             id = data.get("qid", "0")
             question = Question.objects.get(id=id)
             question.yes += 1
             question.votes += 1
-            print("yes")
+            # print("yes")
 
         question.save()
         questionid_list = request.session['questionid_list']
