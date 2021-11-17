@@ -1,13 +1,15 @@
 {% extends 'admin_back/base.html' %}
-
+<style>
+    label{ font}
+</style>
 {% block content %}
-    <div class="container">
-        <h1>Create Survey</h1>
+    <div class="w3-container w3-left-align w3-padding:25">
+        <h1 align="center"><b>Create Survey</b></h1>
         <hr>
         <form method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="survey_name">Survey Name</label>
+                <label for="survey_name" style="font-size:22px">Survey Name</label>
                 <input type="text" class="form-control" id="survey_name" name="survey_name" placeholder="Enter survey name">
                 <small class="form-text text-muted">Survey names must be unique.</small>
             </div>
