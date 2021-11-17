@@ -4,57 +4,40 @@
 {% block content %}
     <a style="text-align: center; padding: 10px"><H1>Manage/Launch Surveys</H1></a>
 
-<div class="container" align="center" id=manage-survey">
-    <strong>*Only one survey can be active at a time to launch</strong><br><br>
-    <div class="row justify-content-center" style="padding-top: 10px">
-        <div class="col-2">
-            <h5>Active</h5>
-        </div>
-        <div class="col-2">
-            <h5>Survey Name</h5>
-        </div>
-        <div class="col-2">
-            <h5>Edit Survey</h5>
-        </div>
-        <div class="col-2">
-            <h5>Delete Survey</h5>
-        </div>
-        <div class="col-2>">
-             <h5>Launch Survey</h5>
-        </div>
+    <div class="container" align="center" id=manage-survey">
+        <strong>*Only one survey can be active at a time to launch</strong><br><br>
+        <table align="center" border="1px solid black" cellpadding="10px">
+            <tr>
+                <th>Active</th>
+                <th>Survey Name</th>
+                <th>Edit Survey</th>
+                <th>Delete Survey</th>
+                <th>Launch Survey</th>
+            </tr>
+            <tr>
+                {% for s in surveys %}
+                    <form method="POST" name="{{ s.title }}" id="{{ s.title }}">
+                        {% csrf_token %}
+                               <td style="text-align: center"> <input type="submit" value="   " id="{{ s.title }}-active" name="active"
+                                       style="{% if s.state == 1 %} background-color: #ffc107 {% endif %}"/> </td>
+                                <td>{{ s.title }}</td>
+                                <input type="hidden" value="{{ s.id }}" name="sid"/>
+                                <td><input type="submit" class="btn btn-warning" value="Edit" name="edit"
+                                       id="{{ s.title }}-edit"></td>
+                                <td><input type="submit" class="btn btn-warning" value="Delete Survey" name="delete"
+                                       id="{{ s.title }}-delete"></td>
+                                <td><input type="submit" class="btn btn-warning " value="Launch Survey" name="launch"
+                                       id="{{ s.title }}-launch"
+                                       style="{% if s.state == 0 %} visibility: hidden {% endif %}"></td>
+                    </form>
+                {% endfor %}
+            </tr>
+            <div id="result"></div>
+        </table>
+        <br>
+        <br/>
+        <button type="button" class="btn btn-warning" onclick="window.location.href = '/admin/create_survey/'">Create
+            New Survey
+        </button>
     </div>
-    {% for s in surveys %}
-        <form method= "POST" name="{{ s.title }}" id="{{ s.title }}">
-            {% csrf_token %}
-             <div class="row justify-content-center" style="padding-top: 10px">
-                <div class="col-2">
-                    <input type="submit" value="   " id="{{ s.title }}-active" name="active"
-                           style="{% if s.state == 1 %} background-color: #ffc107 {% endif %}"/>
-                </div>
-                <div class="col-2">
-                   {{ s.title }}
-                    <input type="hidden" value ="{{ s.id }}" name = "sid"/>
-                </div>
-                <div class="col-2">
-                    <input type="submit" class="btn btn-warning" value="Edit" name="edit" id="{{ s.title }}-edit">
-                </div>
-                <div class="col-2">
-                    <input type="submit" class="btn btn-warning" value="Delete Survey" name="delete" id="{{ s.title }}-delete">
-                </div>
-                 <div class="col-2">
-                    <input type="submit" class="btn btn-warning " value="Launch Survey" name="launch" id="{{ s.title }}-launch"
-                           style="{% if s.state == 0 %} visibility: hidden {% endif %}">
-                </div>
-             </div>
-        </form>
-     {% endfor %}
-         <div id="result"></div>
-    <br>
-    <br/>
-    <button type="button" class="btn btn-warning" onclick="window.location.href = '/admin/create_survey/'">Create New Survey</button>
-</div>
-
-
-
-
 {% endblock %}
