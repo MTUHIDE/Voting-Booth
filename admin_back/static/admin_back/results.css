@@ -49,3 +49,7 @@ tr:nth-child(even) {
   background-color:rgb(204, 0, 153);
   text-align: right;
 }
+
+.btn {
+    margin: 10px;
+}

@@ -1,0 +1,16 @@
+.rfid-input, .rfid-input:focus {
+    margin: auto;
+    color: rgba(0,0,0,0);
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    outline: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 3%;
+    width: 100%;
+    text-align: center;
+}

@@ -1,5 +1,11 @@
 {% extends 'admin_back/noHeaderBase.html' %}
 
+{% block styles %}
+    {{ block.super }}
+    {% load static %}
+<link rel="stylesheet" href="{% static 'admin_back/surveyPages.css' %}" xmlns:width="http://www.w3.org/1999/xhtml"
+      xmlns:width="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml">
+{% endblock %}
 
 {% block content %}
 
@@ -27,7 +33,7 @@
                              }, 1000);
                         </script>
                     </div>
-                    <input type="text" name="rfid-input" class="form-row" autofocus="autofocus" style="margin: auto" tabindex=1>
+                    <input type="text" name="rfid-input" class="form-row rfid-input" autofocus="autofocus" style="margin: auto" tabindex=1>
                     <input type="submit" class="btn" value= "RFID" name="start" style="visibility: hidden"/>
                     <div class="row row-justify-content-center button-container">
                         <div class="col-sm-6" style="text-align: center">
@@ -39,6 +45,7 @@
                     </div>
                 </form>
 
-
-
+<footer>
+    <strong>RFID reader not working?</strong> Try <a href="javascript:window.location.href=window.location.href">refreshing</a> the page.
+</footer>
 {% endblock %}

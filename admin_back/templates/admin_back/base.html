@@ -21,7 +21,7 @@
 
     <body>
         <nav class="navbar navbar-default navbar-fixed-top justify-content-between" style="background-color: black; padding: 5px">
-             <a class="top-banner" style="text-decoration: none;">
+             <a class="top-banner" style="text-decoration: none;" href="/admin/dashboard">
                 <div class="top-banner">
                     <img class ="logo" href="/" src ="{% static 'admin_back/assets/vb-logo-new.png'%}">
                 </div>
@@ -33,12 +33,12 @@
 
                    <!-- <a class ="top-banner" style="font-size: 20px;text-decoration: none ; white-space: nowrap";>Hello, {{ request.user }}</a>
                     -->
-                    <a class="top-banner" style="font-size: 20px; text-decoration: none;" href="/admin/dashboard">
-                        DASHBOARD
-                    </a>
+<!--                    <a class="top-banner" style="font-size: 20px; text-decoration: none;" href="/admin/dashboard">-->
+<!--                        DASHBOARD-->
+<!--                    </a>-->
                     <div class="top-banner">
                         <div class="dropdown" style="position: static; padding-bottom: 9px; ">
-                             <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             <button class="btn btn-warning dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Hello, {{ request.user }}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" style="top: auto" aria-labelledby="dropdownMenuButton">

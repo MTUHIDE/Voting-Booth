@@ -12,6 +12,8 @@ from functools import wraps
 
 import urllib
 import json
+import csv
+import datetime
 import requests
 from django.urls import reverse
 
@@ -307,23 +309,35 @@ def results(request):
 def results(request):
     info = Question.objects.all()
     survey = Survey.objects.all()
-    print(request.method)
     if request.method == 'POST':
-        print(request.POST)
         if not survey:
             display = ''
         else:
             data = request.POST
-            display = data.get("surveys")
+            if 'export' in data:
+                display = data.get("surveys")
+                current_datetime = datetime.datetime.now()
+                response = HttpResponse(content_type='text/csv')
+                response['Content-Desposition'] = 'attachment; filename = "results.csv"'
+
+                writer = csv.writer(response)
+                writer.writerow(['Date of results download: ' + current_datetime.strftime('%Y-%m-%d %H:%M')])
+                writer.writerow(['Survey Title', 'Survey Question', 'Yes', 'No', 'Total'])
+                for s in info:
+                    if s.survey == display or s.survey.title == display:
+                        writer.writerow([s.survey, s.text, s.yes, s.no, s.votes])
+
+                return response
+            else:
+                display = data.get("surveys")
     elif request.method == 'GET':
-        print(request.GET)
         if not survey:
             display = ''
         else:
             for x in range(0, len(survey)):
                 if survey[x].state == 1:
                     display = survey[x]
-        print(display)
+        # print(display)
     else:
         if not survey:
             display = ''
@@ -433,3 +447,4 @@ def end_survey(request, survey_id):
         return redirect('admin_back:take_survey', survey_id=survey_id)
 
     return render(request, 'admin_back/end_survey.html', context)
+
