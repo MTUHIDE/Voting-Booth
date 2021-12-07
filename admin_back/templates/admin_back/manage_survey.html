@@ -3,7 +3,13 @@
 
 {% block content %}
     <a style="text-align: center; padding: 10px"><H1>Manage/Launch Surveys</H1></a>
-
+    <a style="text-align: center; padding: 10px">
+        <h4 id="rifd-label">RFID Identifier:</h4>
+        <form method="POST">
+            {% csrf_token %}
+            <input id="rfid-input" name="rfid-input" type="text">
+        </form>
+    </a>
     <div class="container" align="center" id=manage-survey">
         <strong>*Only one survey can be active at a time to launch</strong><br><br>
         <table align="center" border="1px solid black" cellpadding="10px" style="font-size: small">
