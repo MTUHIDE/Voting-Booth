@@ -30,7 +30,9 @@
                                 <input type="hidden" value="{{ s.id }}" name="sid"/>
                                 <td style="text-align: center"><input type="submit" class="btn btn-warning" value="Edit" name="edit"
                                        id="{{ s.title }}-edit" style="font-size: small"></td>
-                                <td><input type="submit" class="btn btn-warning" value="Delete Survey" name="delete"
+                                <td><input type="submit" class="btn btn-warning"
+                                           onclick="return confirm('Are you sure you want to delete this survey? This action cannot be undone.')"
+                                           value="Delete Survey" name="delete"
                                        id="{{ s.title }}-delete" style="font-size: small"></td>
                                 <td><input type="submit" class="btn btn-warning " value="Launch Survey" name="launch"
                                        id="{{ s.title }}-launch"
