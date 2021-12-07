@@ -20,6 +20,9 @@ from django.urls import reverse
 from .forms import QuestionForm, SurveyForm, UserCreationForm, CreateUserForm, EditProfileForm
 from .models import Question, Survey
 
+import tkinter as tk
+from tkinter import ttk
+import tkinter.font as font
 
 def registration(request):
     form = CreateUserForm()
@@ -186,24 +189,52 @@ def manage_question(request, survey_id):
 def manage_survey(request):
     info = Survey.objects.all()
     context = {"surveys": info}
+
     if request.method == "POST":
-        id = request.POST.get("sid", "0")
-        survey = Survey.objects.get(id=id)
-        if "edit" in request.POST:
-            request.method = None
-            return redirect('admin_back:manage_question', survey_id=id)
-        elif "active" in request.POST:
-            for each in Survey.objects.all():
-                each.state = 0
-                each.save()
-            survey.state = 1
-            survey.save()
-            return redirect('admin_back:manage_survey')
-        elif "delete" in request.POST:
-            survey.delete()
-        elif "launch" in request.POST:
-            request.method = None
-            return redirect('admin_back:take_survey', survey_id=id)
+
+        answer = request.POST
+
+        if "rfid-input" in answer:
+
+            def popupmsgyes(msg):
+                popup = tk.Tk()
+                popup.wm_title("RFID Label")
+                popup.geometry("300x150")
+                label = ttk.Label(popup, text=msg, font=("Courier", 54))
+                label.pack(side="top", fill="x", padx=80, pady=30)
+                popup.mainloop()
+            def popupmsgno(msg):
+                popup = tk.Tk()
+                popup.wm_title("RFID Label")
+                popup.geometry("300x150")
+                label = ttk.Label(popup, text=msg, font=("Courier", 54))
+                label.pack(side="top", fill="x", padx=100, pady=30)
+                popup.mainloop()
+
+            if len(request.POST.get('rfid-input')) == 13:
+                popupmsgyes("Yes")
+                print("yes")
+            else:
+                popupmsgno("No")
+                print("no")
+        else:
+            id = request.POST.get("sid", "0")
+            survey = Survey.objects.get(id=id)
+            if "edit" in request.POST:
+                request.method = None
+                return redirect('admin_back:manage_question', survey_id=id)
+            elif "active" in request.POST:
+                for each in Survey.objects.all():
+                    each.state = 0
+                    each.save()
+                survey.state = 1
+                survey.save()
+                return redirect('admin_back:manage_survey')
+            elif "delete" in request.POST:
+                survey.delete()
+            elif "launch" in request.POST:
+                request.method = None
+                return redirect('admin_back:take_survey', survey_id=id)
 
     return render(request, 'admin_back/manage_survey.html', context)
 
