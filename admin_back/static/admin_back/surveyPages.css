@@ -7,10 +7,3 @@
     border-bottom-style: hidden;
     outline: none;
 }
-
-footer {
-    position: fixed;
-    bottom: 3%;
-    width: 100%;
-    text-align: center;
-}
