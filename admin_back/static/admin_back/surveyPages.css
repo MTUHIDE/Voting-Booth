@@ -1,9 +1,4 @@
 .rfid-input, .rfid-input:focus {
     margin: auto;
-    color: rgba(0,0,0,0);
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: hidden;
-    outline: none;
+    opacity: 0;
 }

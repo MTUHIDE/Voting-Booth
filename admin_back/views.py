@@ -196,27 +196,10 @@ def manage_survey(request):
 
         if "rfid-input" in answer:
 
-            def popupmsgyes(msg):
-                popup = tk.Tk()
-                popup.wm_title("RFID Label")
-                popup.geometry("300x150")
-                label = ttk.Label(popup, text=msg, font=("Courier", 54))
-                label.pack(side="top", fill="x", padx=80, pady=30)
-                popup.mainloop()
-            def popupmsgno(msg):
-                popup = tk.Tk()
-                popup.wm_title("RFID Label")
-                popup.geometry("300x150")
-                label = ttk.Label(popup, text=msg, font=("Courier", 54))
-                label.pack(side="top", fill="x", padx=100, pady=30)
-                popup.mainloop()
-
             if len(request.POST.get('rfid-input')) == 13:
-                popupmsgyes("Yes")
-                print("yes")
+                messages.success(request, "Yes")
             else:
-                popupmsgno("No")
-                print("no")
+                messages.success(request, "No")
         else:
             id = request.POST.get("sid", "0")
             survey = Survey.objects.get(id=id)

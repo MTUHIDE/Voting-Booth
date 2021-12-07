@@ -4,10 +4,19 @@
 {% block content %}
     <a style="text-align: center; padding: 10px"><H1>Manage/Launch Surveys</H1></a>
     <a style="text-align: center; padding: 10px">
-        <h4 id="rifd-label">RFID Identifier:</h4>
+        <h4 id="rifd-label">RFID Identifier:
+                {% if messages %}
+                    {% for message in messages %}
+                        <br>
+                        {{ message }}
+                    {% endfor %}
+                {% endif %}</h4>
         <form method="POST">
             {% csrf_token %}
-            <input id="rfid-input" name="rfid-input" type="text">
+            <p> Click Here :
+                <input id="rfid-input" name="rfid-input" type="text">
+                and tap ID to identify RFID
+            </p>
         </form>
     </a>
     <div class="container" align="center" id=manage-survey">
