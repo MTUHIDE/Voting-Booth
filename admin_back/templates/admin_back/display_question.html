@@ -28,11 +28,17 @@
                     <input type="text" name="rfid-input" class="form-row rfid-input" autofocus="autofocus" autocomplete="off" tabindex=1>
                     <input type="submit" class="btn" value= "RFID" name="rfid-btn" style="visibility: hidden"/>
                     <div class="row row-justify-content-center button-container">
-                        <div class="col-sm-6" style="text-align: center">
-                            <input type="submit" class="btn btn-danger btn-xl" value= "No" name="no"/>
+                        <div class="col-sm-4" style="text-align: left">
+                            <img src="{% static 'admin_back/assets/mt20-no.jpg'%}" style="height: 60%;">
+<!--                            <input type="submit" class="btn btn-danger btn-xl" value= "No" name="no"/>-->
                         </div>
-                        <div class="col-sm-6" style="text-align: center">
-                            <input type="submit" class="btn btn-success btn-xl" value= "Yes" name="yes"/>
+                        <div class="col-sm-4" style="text-align: center">
+                            <img src="{% static 'admin_back/assets/huskycard-front-example.jpg'%}" style="margin: 100px; height: 40%;">
+<!--                            <input type="submit" class="btn btn-danger btn-xl" value= "No" name="no"/>-->
+                        </div>
+                        <div class="col-sm-4" style="text-align: right">
+<!--                            <input type="submit" class="btn btn-success btn-xl" value= "Yes" name="yes"/>-->
+                            <img src="{% static 'admin_back/assets/mt20-yes.jpg'%}" style="height: 60%;">
                         </div>
                     </div>
                 </form>

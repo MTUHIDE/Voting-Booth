@@ -199,7 +199,7 @@ def manage_survey(request):
             if len(request.POST.get('rfid-input')) == 13:
                 messages.success(request, "Yes")
             else:
-                messages.success(request, "No")
+                messages.error(request, "No")
         else:
             id = request.POST.get("sid", "0")
             survey = Survey.objects.get(id=id)

@@ -122,12 +122,12 @@ input{
 
 .button-container{
   position: fixed;
-  bottom: 10%;
+  bottom: -20%;
   width: 100%
 }
 
 .center-question{
-  margin-top: 10%;
+  margin-top: 2%;
   margin-bottom: auto;
 }
 

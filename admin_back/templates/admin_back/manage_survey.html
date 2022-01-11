@@ -3,24 +3,27 @@
 
 {% block content %}
     <a style="text-align: center; padding: 10px"><H1>Manage/Launch Surveys</H1></a>
-    <a style="text-align: center; padding: 10px">
-        <h4 id="rifd-label">RFID Identifier:
-                {% if messages %}
-                    {% for message in messages %}
-                        <br>
-                        {{ message }}
-                    {% endfor %}
-                {% endif %}</h4>
+    <div style="text-align: center; padding: 10px; margin-bottom: 20px; background-color: #EBEBEB;">
+        <h4 id="rifd-label">Instructions:</h4>
+        <ul style="display: inline-block; text-align: left;">
+            <li>Only one survey can be active at a time to launch</li>
+            <li>Tip: turn off automatic sleep/power-down settings on your device</li>
+            <li>Tip: convert to full screen for best viewing during launch</li>
+        </ul>
         <form method="POST">
             {% csrf_token %}
             <p> Click Here :
                 <input id="rfid-input" name="rfid-input" type="text">
-                and tap ID to identify RFID
+                and tap ID to identify which RFID reader is yes/no<br>
+                {% if messages %}
+                    {% for message in messages %}
+                <h5>RFID Identifier: {{ message }}</h5>
+                    {% endfor %}
+                {% endif %}
             </p>
         </form>
-    </a>
+    </div>
     <div class="container" align="center" id=manage-survey">
-        <strong>*Only one survey can be active at a time to launch</strong><br><br>
         <table align="center" border="1px solid black" cellpadding="10px" style="font-size: small">
             <tr>
                 <th>Active</th>
@@ -53,9 +56,9 @@
             <div id="result"></div>
         </table>
         <br>
-        <br/>
         <button type="button" class="btn btn-warning" onclick="window.location.href = '/admin/create_survey/'">Create
             New Survey
         </button>
     </div>
+<br><br>
 {% endblock %}
