@@ -11,6 +11,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import environ
+
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+# Get variables from .env
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,14 +28,53 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0ueky(5%*#i0q6x@#ssawgda+bf3u#32d8t06qpyb3cjtsndy6'
-OLD_RECAPTCHA_SECRET_KEY = '6LdlyvIZAAAAAKdUT5BnGPDdOOO-ge0372znZao1'
-RECAPTCHA_SECRET_KEY = '6LeGC1EaAAAAAI4zqb2O69WyGpw3iPeoFPuL7jCP'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'use the google provided details here'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'use the secret key here'
+OLD_RECAPTCHA_SECRET_KEY = env('OLD_RECAPTCHA_SECRET_KEY')
+RECAPTCHA_SECRET_KEY = env('RECAPTCHA_SECRET_KEY')
+
+# TODO: ACCESS_TOKEN
+# ACCESS_TOKEN = env('ACCESS_TOKEN')
+
+# Email
+
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+
+# https://docs.djangoproject.com/en/2.0/ref/settings/#std:setting-EMAIL_FILE_PATH (document for below code)
+# SMTP (simple mail transfer protocol) configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env.int('EMAIL_PORT')
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env('EMAIL_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
+# go to https://myaccount.google.com/lesssecureapps, log in to your account and make 'Allow less secure apps: ON'
+
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+# TODO
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+    # 'default': env.db('DATABASE_URL', default='')
+}
+
+ALLOWED_HOSTS = ['*']
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# TODO: AUTHENTICATION_BACKENDS
 
 # Application definition
 
@@ -61,10 +108,7 @@ ROOT_URLCONF = 'votingbooth.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'admin_back/templates'),
-        ]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'admin_back/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,17 +122,8 @@ TEMPLATES = [
         },
     },
 ]
+
 WSGI_APPLICATION = 'votingbooth.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -112,47 +147,25 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'America/New_York'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
+# TODO: STATIC_ROOT
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "admin_back/static"),
-    #'polls/static/polls',
-    #'admin_back/static/admin_back',
+    # 'polls/static/polls',
+    # 'admin_back/static/admin_back',
 ]
 
+# TODO: STATICFILES_STORAGE
 
-AUTHENTICATION_BACKENDS=(
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
-#google o-auth client id and secret key
-#LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/admin/dashboard/'
+# Login Redirect
+# _REDIRECT_URL = 'http://127.0.0.1:8000/admin/dashboard/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-#EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-#EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'use the google provided details here'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'use the secret key here'
-# https://docs.djangoproject.com/en/2.0/ref/settings/#std:setting-EMAIL_FILE_PATH (document for below code)
-# SMTP (simple mail transfer protocol) configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'hide.test.voting.booth@gmail.com'
-EMAIL_HOST_PASSWORD = 'Voting!booth1'
-
-# go to https://myaccount.google.com/lesssecureapps, log in to your account and make 'Allow less secure apps: ON'
