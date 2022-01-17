@@ -17,6 +17,8 @@ Basic instructions:
 - $ python manage.py runserver
 - http://localhost:8000
 
+-----------------------------------------------------------------------------------------------------
+Legacy Instructions:
 
 <ol>
     <li>Download or Open PyCharm by JetBrains</li>
