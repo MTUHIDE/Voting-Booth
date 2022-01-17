@@ -125,6 +125,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'votingbooth.wsgi.application'
 
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, 'votingbooth/fixtures')
+]
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
