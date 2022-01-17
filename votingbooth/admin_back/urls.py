@@ -1,5 +1,5 @@
 from django.urls import path
-from admin_back import views
+from . import views
 from django.contrib.auth import views as auth_views
 
 app_name = 'admin_back'

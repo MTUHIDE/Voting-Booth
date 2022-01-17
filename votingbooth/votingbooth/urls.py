@@ -1,11 +1,8 @@
-from django.contrib import admin
-from django.urls import include, path
-from admin_back import views
 from django.urls import path, include
 from django.conf.urls import url
-from django.contrib.auth import views as auth_views
 from django.conf import settings
 from social_core.utils import setting_name
+from . import views
 
 extra = getattr(settings,setting_name('TRAILING_SLASH'), True) and '/' or ''
 

@@ -7,6 +7,7 @@ lib
 lib64
 pyvenv.cfg
 *.egg-info
-admin_back/migrations
-polls/migrations
-db.sqlite3
+votingbooth/admin_back/migrations
+votingbooth/polls/migrations
+votingbooth/db.sqlite3
+.env
