@@ -22,7 +22,7 @@ lxml==4.7.1
 numpy==1.22.1
 oauth2==1.9.0.post1
 oauthlib==3.1.1
-parse==1.19.0
+parse==1.6.5
 Pillow==9.0.0
 pycparser==2.21
 PyJWT==2.3.0
