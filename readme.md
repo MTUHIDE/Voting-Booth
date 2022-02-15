@@ -1,8 +1,25 @@
 <h1>Voting Booth</h1>
-Last Updated: 9/01/21
+Last Updated: 1/17/2022
 <h2>Introduction</h2>
 Voting Booth is meant to be a mobile application that allows USG to survey the student population. 
 The project makes use of Django which is a Python based web framework.
+
+*Development instructions currently under construction*
+
+Basic instructions:
+- Install Git
+- Install Python 3.8
+- Clone the repo
+- $ git checkout develop
+- $ pip install -r requirements.txt
+- $ cd votingbooth
+- $ python manage.py migrate
+- $ python manage.py runserver
+- http://localhost:8000
+
+-----------------------------------------------------------------------------------------------------
+Legacy Instructions:
+
 <h2>Setup: https://youtu.be/4Kgu8OnjrJw </h2>
 <ol>
     <li>Download or Open PyCharm by JetBrains</li>
