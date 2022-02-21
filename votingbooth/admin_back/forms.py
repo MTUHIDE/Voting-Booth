@@ -58,7 +58,7 @@ class CreateUserForm(UserCreationForm):
 class EditProfileForm(UserChangeForm):
     def clean_email(self):
         data = self.cleaned_data['email']
-        if "@mtu.edu" not in data and data is not "":  # any check you need
+        if "@mtu.edu" not in data and data != "":  # any check you need
             raise forms.ValidationError("Must be a MTU email address")
         return data
 

@@ -20,9 +20,6 @@ from django.urls import reverse
 from .forms import QuestionForm, SurveyForm, UserCreationForm, CreateUserForm, EditProfileForm
 from .models import Question, Survey
 
-import tkinter as tk
-from tkinter import ttk
-import tkinter.font as font
 
 def registration(request):
     form = CreateUserForm()
