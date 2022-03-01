@@ -13,9 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import environ
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+env = environ.Env()
 
 # Get variables from .env
 environ.Env.read_env()
