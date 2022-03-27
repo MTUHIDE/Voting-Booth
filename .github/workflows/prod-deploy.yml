@@ -1,4 +1,4 @@
-name: Deploy the master branch to huskyhunt.com
+name: Deploy the master branch to votingbooth-mtu.com
 
 on:
   push:
