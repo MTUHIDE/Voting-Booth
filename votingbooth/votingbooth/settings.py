@@ -79,7 +79,7 @@ AUTHENTICATION_BACKENDS = (
 INSTALLED_APPS = [
     'social_django',
     'admin_back',
-    'polls',
+    # 'polls',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
