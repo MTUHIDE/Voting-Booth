@@ -58,11 +58,11 @@ EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 # TODO
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-    'default': env.db('DATABASE_URL', default='sqlite://db.sqlite3')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+    # 'default': env.db('DATABASE_URL', default='sqlite://db.sqlite3')
 }
 
 ALLOWED_HOSTS = ['*']
