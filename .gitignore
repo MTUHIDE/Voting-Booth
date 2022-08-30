@@ -9,5 +9,5 @@ pyvenv.cfg
 *.egg-info
 votingbooth/admin_back/migrations
 votingbooth/polls/migrations
-votingbooth/db.sqlite3
+votingbooth/test
 .env
