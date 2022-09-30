@@ -11,5 +11,5 @@ django-smartfields
 psycopg2
 
 scikit-learn==0.23.2
-joblib==0.14.1
+joblib==1.2.0
 requests
