@@ -13,7 +13,9 @@ Basic instructions:
 - $ git checkout develop
 - $ pip install -r requirements.txt
 - $ cd votingbooth
+- $ python manage.py makemigrations
 - $ python manage.py migrate
+- $ python manage.py loaddata default
 - $ python manage.py runserver
 - http://localhost:8000
 
