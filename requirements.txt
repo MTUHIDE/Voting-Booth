@@ -5,7 +5,7 @@ django-cron
 gunicorn
 django-environ
 whitenoise
-mysqlclient
+# mysqlclient
 djangorestframework
 django-smartfields
 psycopg2
