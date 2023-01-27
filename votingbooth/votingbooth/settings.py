@@ -109,6 +109,8 @@ MIDDLEWARE = [
     'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://*.web-production-c7cb.up.railway.app']
+
 ROOT_URLCONF = 'votingbooth.urls'
 
 TEMPLATES = [
